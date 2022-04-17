@@ -1,0 +1,63 @@
+body {
+  margin: 0;
+  background-color: rgba(232, 232, 232, 0.831);
+}
+
+div {
+  box-sizing: border-box;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.Up-box {
+  background-color: white;
+  width: 800px;
+  height: 120px;
+  border: 1px solid black;
+  margin-top: 150px;
+  display: flex;
+  justify-content: center;
+}
+
+.Up-box form{
+  padding:20px;
+
+}
+
+
+.input-1, .input-2, .input-3 {
+  display: flex;
+  flex-direction: column;
+}
+.input-3 input {
+  width:250px;
+  height:40px;
+}
+.input-4 {
+  margin-top:20px;
+}
+
+.Down-box {
+  display: flex;
+}
+
+.Down-box1 {
+  background-color: white;
+  width: 400px;
+  height: 300px;
+  margin-top:10px;
+  border: 1px solid black;
+}
+
+.Down-box2 {
+  background-color: white;
+  width: 400px;
+  height: 300px;
+  margin-top:10px;
+  border: 1px solid black;
+}

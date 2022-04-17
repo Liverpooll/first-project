@@ -1,1 +1,59 @@
-todolist
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="todolist.CSS">
+  <title>Document</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'todolist.CSS'%}">
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="Up-box">
+        <form action="#">
+          <div class="input-1">
+          <span>닉네임</span>
+          <input class="text">
+          </div>
+        </form>
+        <form action="#">
+          <div class="input-2">
+          <span>마감기한</span>
+          <input type="date">
+        </div>
+        </form>
+        <form action="#">
+          <div class="input-3">
+          <span>To do!</span>
+          <input type="text">
+        </div>
+        </form>
+        <form action="#">
+          <div class="input-4">
+          <input type="submit">
+          </div>
+        </form>
+    </div>
+
+    <div class="Down-box">
+    <div class="Down-box1">
+    {% for i in todos %}
+    {{i.todo}}
+    {{i.completed}}
+    {% endfor %}
+    </div>
+
+    <div class="Down-box2">
+
+    </div>
+    </div>
+</div>
+  
+
+
+  <script src="todolist.js" defer></script>
+</body>
+</html>
