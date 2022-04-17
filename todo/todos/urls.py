@@ -1,9 +1,9 @@
 from django.urls import path
-from todos import views
+from todos.views import TodoListView
 
 
 app_name = 'todos'
 
 urlpatterns = [
-    path('todolist/', views.todolist, name='todolist'),
+    path('todolist/', TodoListView.as_view(), name='todolist'),
 ]
