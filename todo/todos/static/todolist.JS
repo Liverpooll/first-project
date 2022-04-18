@@ -9,9 +9,6 @@ $.ajax({
   url: '/todos/async-test/',
   type: "POST",
   data:sendData,
-  beforeSend:function(xhr) {
-     xhr.setRequestHeader(header, token);
-     },
    dataType:'html',
   success: function (data){
     $('.Down-box1').html(data);
