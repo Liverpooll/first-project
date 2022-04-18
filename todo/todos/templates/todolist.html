@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="todolist.CSS">
-  <title>Document</title>
+  <link rel="stylesheet" href="/static/todolist.CSS">
+  <title>ToDoList</title>
   {% load static %}
   <link rel="stylesheet" href="{% static 'todolist.CSS'%}">
 </head>
@@ -13,7 +13,7 @@
 
 <div class="wrapper">
     <div class="Up-box">
-        <form action="#">
+        <form action="#" method="POST">
           <div class="input-1">
           <span>닉네임</span>
           <input class="text">
@@ -28,12 +28,12 @@
         <form action="#">
           <div class="input-3">
           <span>To do!</span>
-          <input type="text">
+          <input type="text" class="todoValue">
         </div>
         </form>
         <form action="#">
           <div class="input-4">
-          <input type="submit">
+          <input type="submit" class="connect">
           </div>
         </form>
     </div>
@@ -54,6 +54,6 @@
   
 
 
-  <script src="todolist.js" defer></script>
+  <script src="/static/todolist.JS" defer></script>
 </body>
 </html>
