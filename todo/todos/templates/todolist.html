@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+  <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
   <link rel="stylesheet" href="/static/todolist.CSS">
   <title>ToDoList</title>
   {% load static %}
@@ -13,27 +15,27 @@
 
 <div class="wrapper">
     <div class="Up-box">
-        <form action="#" method="POST">
+        <form action="#">
           <div class="input-1">
           <span>닉네임</span>
-          <input class="text">
+          <input type="text" method="POST">
           </div>
         </form>
         <form action="#">
           <div class="input-2">
           <span>마감기한</span>
-          <input type="date">
+          <input type="date" method="POST">
         </div>
         </form>
         <form action="#">
           <div class="input-3">
           <span>To do!</span>
-          <input type="text" class="todoValue">
+          <input type="text" name="username" class="todoValue" method="POST">
         </div>
         </form>
         <form action="#">
           <div class="input-4">
-          <input type="submit" class="connect">
+          <input type="button" id="submit" class="connect" method="POST">
           </div>
         </form>
     </div>
@@ -52,8 +54,7 @@
     </div>
 </div>
   
-
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="/static/todolist.JS" defer></script>
 </body>
 </html>

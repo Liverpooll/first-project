@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  background-color: rgba(232, 232, 232, 0.831);
+  background-color: rgba(216, 216, 216, 0.831);
 }
 
 div {
@@ -29,11 +29,16 @@ div {
 
 }
 
+input-1 input {
+  margin-top: 20px;
+}
 
 .input-1, .input-2, .input-3 {
   display: flex;
   flex-direction: column;
+
 }
+
 .input-3 input {
   width:250px;
   height:40px;
