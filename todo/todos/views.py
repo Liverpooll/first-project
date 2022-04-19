@@ -32,8 +32,8 @@ class Create(View):
         try:
             Todo.objects.create(
                 todo = request.POST['todo'],
-                # deadline = request.POST['deadline'],
-                # created = request.POST['created'],
+                deadline = request.POST['deadline'],
+                created = request.POST['created'],
             )
             result = True
         except:
