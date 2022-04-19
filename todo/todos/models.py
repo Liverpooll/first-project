@@ -5,7 +5,7 @@ from accounts.models import User
 
 
 class Todo(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='유저')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='유저', blank=True, null=True)
     todo = models.CharField(max_length=25, verbose_name='할일')
     is_completed = models.BooleanField(default=False, verbose_name='완료여부')
     deadline = models.DateTimeField(null=True, blank=True, verbose_name='기한')
@@ -15,4 +15,4 @@ class Todo(models.Model):
         verbose_name_plural = '할일'
 
     def __str__(self):
-        return str(self.user.nickname) + str(self.todo)
+        return str(self.user) + str(self.todo)
