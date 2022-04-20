@@ -26,8 +26,8 @@ def async_test(request):
         return JsonResponse({'result':False})
 
 
-# django cbv view 를 연습하기 위해 create는 django view 를 활용해봄. 
-class Create(View):
+# django cbv view 를 연습하기 위해 비동기통신을 django view 를 활용해봄. 
+class TodoCreateView(View):
     def post(self, request, *args, **kwargs):
         try:
             Todo.objects.create(
@@ -38,6 +38,17 @@ class Create(View):
             result = True
         except:
             result = False
+        context = {
+            'is_success': result
+        }
+        return JsonResponse(context, safe=False)
+
+
+class TodoDeleteView(View):
+    def post(self, request, *args, **kwargs):
+        id = request.POST['id']
+        Todo.objects.get(id=id).delete()
+        result = 'success'
         context = {
             'is_success': result
         }
