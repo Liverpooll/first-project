@@ -47,8 +47,11 @@ class TodoCreateView(View):
 class TodoDeleteView(View):
     def post(self, request, *args, **kwargs):
         id = request.POST['id']
-        Todo.objects.get(id=id).delete()
-        result = 'success'
+        try:
+            Todo.objects.get(id=id).delete()
+            result = True
+        except:
+            result = False
         context = {
             'is_success': result
         }
