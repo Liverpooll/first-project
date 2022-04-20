@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  $('#submit').click(function(){
+  $('.btn-outline-dark').click(function(){
     let sendData = "username"+$('input[name=username]').val();
 $.ajax({
   url: '/todos/async-test/',
