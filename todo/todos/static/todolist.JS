@@ -1,47 +1,44 @@
-$(document).ready(function(){
-  $('.btn-outline-dark').click(function(){
-    let sendData = "username"+$('input[name=username]').val();
-$.ajax({
-  url: '/todos/async-test/',
-  type: "POST",
-  data:sendData,
-   dataType:'html',
-  success: function (data){
-    $('.Down-box1').html(data);
-  },
-  error: function (error){
-      alert("에러");}
-});
-})
-});
-
-
-
-// using jQuery
-function getCookie(name) {
-  var cookieValue = null;
-  if (document.cookie && document.cookie !== '') {
-      var cookies = document.cookie.split(';');
-      for (var i = 0; i < cookies.length; i++) {
-          var cookie = jQuery.trim(cookies[i]);
-          // Does this cookie string begin with the name we want?
-          if (cookie.substring(0, name.length + 1) === (name + '=')) {
-              cookieValue =   decodeURIComponent(cookie.substring(name.length + 1));
-              break;
-          }
-      }
-  }
-  return cookieValue;
+function getCsrfToken(){
+    return document.cookie.split(';')
+        .find((item) => item.includes('csrftoken'))
+        .split('=')[1];
 }
-var csrftoken = getCookie('csrftoken');
-function csrfSafeMethod(method) {
-  // these HTTP methods do not require CSRF protection
-  return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-}
-$.ajaxSetup({
-  beforeSend: function(xhr, settings) {
-      if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-          xhr.setRequestHeader("X-CSRFToken", csrftoken);
-      }
-  }
+
+btn_outline_dark = document.querySelector(".btn-outline-dark");
+btn_outline_dark.addEventListener('click', event => {
+    event.preventDefault();
+    todo_value = document.querySelector(".todoValue").value
+    if (todo_value == '' ) {
+        alert('뭐라도 입력해봐');
+    }
+    else {
+        alert('call axios')
+        axios({
+            url: `/todos/create/`,
+            method : 'post',
+            headers: {
+                "content-type": "application/json",
+                'X-CSRFToken': getCsrfToken(),
+            },
+            data : {
+                'todo': todo_value,
+            },
+        })
+        .then(function(response){
+            alert('success')
+            console.log(response)
+            result = response.data['is_success']
+            console.log(result)
+            let inner_box = document.querySelector('.Down-box1')
+            if (result==true){
+                inner_box.innerHTML = '<span class="text-salarify">✔</span> 휴대전화 인증이 완료되었습니다'
+            }
+            else {
+                alert('fail')
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+    }
 });
