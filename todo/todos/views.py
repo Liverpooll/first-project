@@ -29,14 +29,20 @@ def async_test(request):
 # django cbv view 를 연습하기 위해 비동기통신을 django view 를 활용해봄. 
 class TodoCreateView(View):
     def post(self, request, *args, **kwargs):
+        logging.info('Here is TodoCreateView')
+        data = json.loads(request.body.decode('utf-8'))
+        logging.info(data)
         try:
             Todo.objects.create(
-                todo = request.POST['todo'],
-                deadline = request.POST['deadline'],
+                todo = data['todo'],
+                # deadline = request.POST['deadline'],
                 created = request.POST['created'],
             )
+            logging.info('Create todo object')
             result = True
-        except:
+        except Exception as e:
+            logging.info('error')
+            logging.info(e)
             result = False
         context = {
             'is_success': result
@@ -46,11 +52,14 @@ class TodoCreateView(View):
 
 class TodoDeleteView(View):
     def post(self, request, *args, **kwargs):
-        id = request.POST['id']
+        data = json.loads(request.body.decode('utf-8'))
+        id = data['id']
         try:
             Todo.objects.get(id=id).delete()
             result = True
-        except:
+        except Exception as e:
+            logging.info('error')
+            logging.info(e)
             result = False
         context = {
             'is_success': result
