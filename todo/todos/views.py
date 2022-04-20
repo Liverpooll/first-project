@@ -36,7 +36,7 @@ class TodoCreateView(View):
             Todo.objects.create(
                 todo = data['todo'],
                 # deadline = request.POST['deadline'],
-                created = request.POST['created'],
+                # created = request.POST['created'],
             )
             logging.info('Create todo object')
             result = True
