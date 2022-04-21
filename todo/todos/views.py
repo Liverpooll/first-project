@@ -65,3 +65,20 @@ class TodoDeleteView(View):
             'is_success': result
         }
         return JsonResponse(context)
+
+
+class TodoEditView(View):
+    def post(self, request, *args, **kwargs):
+        data = json.loads(request.body.decode('utf-8'))
+        try:
+            todo = Todo.objects.get(id = data['id'])
+            todo.todo = data['todo']
+            todo.save()
+            result = True
+        except Exception as e:
+            logging.info(e)
+            result = False
+        context = {
+            'is_success': result
+        }
+        return JsonResponse(context, safe=False)
