@@ -4,15 +4,16 @@ function getCsrfToken(){
         .split('=')[1];
 }
 
-btn_outline_dark = document.querySelector(".btn-outline-dark");
-btn_outline_dark.addEventListener('click', event => {
+
+
+
+const input_todo = function(event) {
     event.preventDefault();
     todo_value = document.querySelector(".todoValue").value
     if (todo_value == '' ) {
         alert('뭐라도 입력해봐');
     }
     else {
-        alert('call axios')
         axios({
             url: `/todos/create/`,
             method : 'post',
@@ -25,13 +26,13 @@ btn_outline_dark.addEventListener('click', event => {
             },
         })
         .then(function(response){
-            alert('success')
-            console.log(response)
+            alert('입력되었습니다!')
             result = response.data['is_success']
-            console.log(result)
             let inner_box = document.querySelector('.Down-box1')
+            const hr = document.createElement("hr");
             if (result==true){
-                inner_box.innerHTML = '<span class="text-salarify">✔</span> 휴대전화 인증이 완료되었습니다'
+                inner_box.append(todo_value);
+                inner_box.append(hr);
             }
             else {
                 alert('fail')
@@ -41,4 +42,7 @@ btn_outline_dark.addEventListener('click', event => {
             console.log(error)
         })
     }
-});
+}
+
+const btn_outline_dark = document.querySelector(".btn-outline-dark");
+btn_outline_dark.addEventListener('click', input_todo);
