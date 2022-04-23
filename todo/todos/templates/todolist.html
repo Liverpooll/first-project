@@ -15,7 +15,6 @@
 </head>
 
 <body>
-
     <div class="wrapper">
     <span class="title">To Do List!</span>
     <div class="Up-box">
@@ -36,7 +35,7 @@
             <div>
             <div class="input-3">
                 <span>To do!</span>
-                <input type="text" name="username" class="todoValue">
+                <input type="text" name="username" class="todoValue" autofocus>
             </div>
             </div>
             <div>
@@ -47,12 +46,15 @@
         </form>
     </div>
     <div class="Down-box">
-        <div class="Down-box1">
+        <ul class="Down-box1">
             {% for i in todos %}
-                {{i.todo}}
+                <li>{{i.todo}}</li><p class="i-id">{{i.id}}<p><button class="btn_delete">X</button> 
                 {{i.completed}}
+
+                <hr>
+               
             {% endfor %}
-        </div>
+        </ul>
         <div class="Down-box2">
         </div>
     </div>
@@ -62,5 +64,4 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="/static/todolist.JS" defer></script>
 </body>
-
 </html>
