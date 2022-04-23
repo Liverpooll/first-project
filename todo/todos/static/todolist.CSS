@@ -103,7 +103,6 @@ form input {
   color: #292f35;
   font-weight:bolder;
   list-style-position:inside;
-  list-style-type:inherit;
   display: inline-block;
 }
 

@@ -40,13 +40,13 @@
             </div>
             <div>
             <div class="input-4">
-                <input class="btn btn-outline-dark" type="button" value="Click!">
+                <input onclick="test()" class="btn btn-outline-dark" type="button" value="Click!">
             </div>
             </div>
         </form>
     </div>
     <div class="Down-box">
-        <ul class="Down-box1">
+        <ol class="Down-box1">
             {% for i in todos %}
                 <li>
                 {{i.todo}}
@@ -55,7 +55,7 @@
                 {% comment %} {{i.completed}} {% endcomment %}
                 </li>
             {% endfor %}
-        </ul>
+        </ol>
         <div class="Down-box2">
         </div>
     </div>

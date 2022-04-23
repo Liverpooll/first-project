@@ -3,7 +3,6 @@ let inner_box = document.querySelector('.Down-box1');
 let span = document.createElement('span');
 let hr = document.createElement("hr");
 let del = document.createElement("button");
-
 let List = [];
 
 
@@ -16,7 +15,7 @@ function getCsrfToken() {
 
 const input_todo = function(event) {
     event.preventDefault();
-    todo_value = document.querySelector(".todoValue").value
+    let todo_value = document.querySelector(".todoValue").value;
     if (todo_value == '') {
         alert('뭐라도 입력해봐');
     } else {
@@ -33,12 +32,14 @@ const input_todo = function(event) {
             })
             .then(function(response) {
                 let result = response.data['is_success']
+                let id = response.data['id'];
                 del.innerText = "x";
                 if (result == true) {
-                    alert('add')
-                    let new_todo_li = '<li>'+todo_value+'</li>'+'<button>X</button>'
-                    console.log(new_todo_li)
-                    inner_box.innerHTML += new_todo_li
+                    let new_todo_li = '<li>'+todo_value + '&nbsp' + id + `<button onclick="delete_todo(${id})" class="x-btn">X</button>` + '</li>' + '<hr>'
+                    inner_box.innerHTML += new_todo_li;
+                    document.querySelector(".todoValue").value = ''
+                    console.log('todo value : ',todo_value)
+
                 } else {
                     alert('fail')
                 }
@@ -54,7 +55,9 @@ btn_outline_dark.addEventListener('click', input_todo);
 
 
 
+
 function delete_todo(id) {
+    let todo_value = document.querySelector(".todoValue").value;
     axios({
             url: `/todos/delete/`,
             method: 'post',
@@ -68,13 +71,10 @@ function delete_todo(id) {
         })
         .then(function(response) {
             let result = response.data['is_success']
-            console.log(result);
             if (result === true) {
-                alert('success')
-                // let button = event.target;
-                // let li = button.parentNode;
-                // let inner_box = document.querySelector('.Down-box1');
-                // inner_box.removeChild(li); 
+                alert('success');
+                deleteOne(event);
+
             } else {
                 alert('fail')
             }
@@ -85,3 +85,10 @@ function delete_todo(id) {
 };
 
 
+let event;
+
+let deleteOne = function (event) {
+    event = event;
+    const removingOne = event.target.parentElement;
+    removingOne.remove();
+}
