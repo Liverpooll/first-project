@@ -56,11 +56,14 @@ class TodoCreateView(View):
 class TodoDeleteView(View):
     def post(self, request, *args, **kwargs):
         data = json.loads(request.body.decode('utf-8'))
+        logging.info(data)
         id = data['id']
+        logging.info(f'__id: {id}')
         try:
-            todo = Todo.objects.get(id=id).delete()
-            result = True
+            todo = Todo.objects.get(id=id)
             id = todo.id
+            todo.delete()
+            result = True
         except Exception as e:
             logging.info('error')
             logging.info(e)
