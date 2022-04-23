@@ -33,19 +33,22 @@ class TodoCreateView(View):
         data = json.loads(request.body.decode('utf-8'))
         logging.info(data)
         try:
-            Todo.objects.create(
+            todo = Todo.objects.create(
                 todo = data['todo'],
                 # deadline = request.POST['deadline'],
                 # created = request.POST['created'],
             )
             logging.info('Create todo object')
             result = True
+            id = todo.id
         except Exception as e:
             logging.info('error')
             logging.info(e)
             result = False
+            id = None
         context = {
-            'is_success': result
+            'is_success': result,
+            'id': id,
         }
         return JsonResponse(context, safe=False)
 
@@ -55,14 +58,17 @@ class TodoDeleteView(View):
         data = json.loads(request.body.decode('utf-8'))
         id = data['id']
         try:
-            Todo.objects.get(id=id).delete()
+            todo = Todo.objects.get(id=id).delete()
             result = True
+            id = todo.id
         except Exception as e:
             logging.info('error')
             logging.info(e)
             result = False
+            id = None
         context = {
-            'is_success': result
+            'is_success': result,
+            'id': id,
         }
         return JsonResponse(context)
 
@@ -75,10 +81,13 @@ class TodoEditView(View):
             todo.todo = data['todo']
             todo.save()
             result = True
+            id = todo.id
         except Exception as e:
             logging.info(e)
             result = False
+            id = None
         context = {
-            'is_success': result
+            'is_success': result,
+            'id': id,
         }
         return JsonResponse(context, safe=False)
