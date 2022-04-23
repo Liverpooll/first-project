@@ -35,12 +35,10 @@ const input_todo = function(event) {
                 let result = response.data['is_success']
                 del.innerText = "x";
                 if (result == true) {
-                    span.innerHTML = todo_value;
-                    li.appendChild(span);
-                    li.appendChild(del);
-                    li.appendChild(hr);
-                    inner_box.appendChild(li);
-                    document.querySelector(".todoValue").value = '';
+                    alert('add')
+                    let new_todo_li = '<li>'+todo_value+'</li>'+'<button>X</button>'
+                    console.log(new_todo_li)
+                    inner_box.innerHTML += new_todo_li
                 } else {
                     alert('fail')
                 }
@@ -56,9 +54,7 @@ btn_outline_dark.addEventListener('click', input_todo);
 
 
 
-const delete_todo = function(event) {
-    event.preventDefault();
-    i_id = document.querySelector('.i-id').innerHTML;
+function delete_todo(id) {
     axios({
             url: `/todos/delete/`,
             method: 'post',
@@ -67,16 +63,18 @@ const delete_todo = function(event) {
                 'X-CSRFToken': getCsrfToken(),
             },
             data: {
-                'id': i_id
+                'id': id,
             },
         })
         .then(function(response) {
             let result = response.data['is_success']
-            if (result == true) {
-                let button = event.target;
-                let li = button.parentNode;
-                let inner_box = document.querySelector('.Down-box1');
-                inner_box.removeChild(li); 
+            console.log(result);
+            if (result === true) {
+                alert('success')
+                // let button = event.target;
+                // let li = button.parentNode;
+                // let inner_box = document.querySelector('.Down-box1');
+                // inner_box.removeChild(li); 
             } else {
                 alert('fail')
             }
@@ -87,4 +85,3 @@ const delete_todo = function(event) {
 };
 
 
-document.querySelector('.btn_delete').addEventListener('click', delete_todo);

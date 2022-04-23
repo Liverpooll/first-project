@@ -115,12 +115,17 @@ form input {
 
 .Down-box1  > ul {
   padding-left: 30px;
+  display: inline-block;
 }
-.Down-box1 > button {
+.Down-box1  button {
   font-size:10px;
-  margin-top:-10px;
   font-weight: bolder;
   float:right;
+  clear:both;
+}
+
+.Down-box1 hr {
+  margin-top:-15px;
 }
 
 .Down-box1:hover, .Down-box2:hover {

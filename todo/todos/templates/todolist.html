@@ -48,11 +48,12 @@
     <div class="Down-box">
         <ul class="Down-box1">
             {% for i in todos %}
-                <li>{{i.todo}}</li><p class="i-id">{{i.id}}<p><button class="btn_delete">X</button> 
-                {{i.completed}}
-
-                <hr>
-               
+                <li>
+                {{i.todo}}
+                <a class='i-id'>{{i.id}}</a>
+                <button onclick="delete_todo({{i.id}})" class="btn_delete" value={{i.id}}>X</button> 
+                {% comment %} {{i.completed}} {% endcomment %}
+                </li>
             {% endfor %}
         </ul>
         <div class="Down-box2">
