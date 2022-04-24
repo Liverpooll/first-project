@@ -52,8 +52,8 @@
                 {{i.todo}}
                 <p class='i-id'>{{i.id}}</p>
                 {% comment %} <div class ="btn-box"> {% endcomment %}
-                <button onclick="edit_todo({{i.id}}, event)" class="btn-edit" value={{i.id}}>M</button> 
-                <button onclick="delete_todo({{i.id}}, event)" class="btn_delete" value={{i.id}}>X</button> 
+                <button onclick="edit_todo({{i.id}}, event)" class="btn-edit" value={{i.todo}}>M</button> 
+                <button onclick="delete_todo({{i.id}}, event)" class="btn_delete" value={{i.todo}}>X</button> 
                 {% comment %} </div> {% endcomment %}
                 {% comment %} {{i.completed}} {% endcomment %}
                 </li>

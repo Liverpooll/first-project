@@ -34,7 +34,7 @@ const input_todo = function(event) {
                 let result = response.data['is_success']
                 let id = response.data['id'];
                 if (result == true) {
-                    let new_todo_li = '<li>' + todo_value + '&nbsp' + id + `<button onclick="edit_todo(${id}, event)" class="m-btn">M</button>` + `<button style="display:inline-block" onclick="delete_todo(${id}, event)" class="x-btn">X</button>` + '</li>'
+                    let new_todo_li = '<li>' + todo_value + '&nbsp' + id + `<button onclick="edit_todo(${id}, event)" class="m-btn" value=${todo_value}>M</button>` + `<button style="display:inline-block" onclick="delete_todo(${id}, event)" class="x-btn">X</button>` + '</li>'
                     inner_box.innerHTML += new_todo_li;
                     document.querySelector(".todoValue").value = null;
 
@@ -81,7 +81,6 @@ function delete_todo(id, event) {
 
 
 function edit_todo(id, event) { 
-    let todo_value = document.querySelector(".todo_list");
     axios({
             url: `/todos/edit/`,
             method: 'post',
@@ -90,7 +89,7 @@ function edit_todo(id, event) {
                 'X-CSRFToken': getCsrfToken(),
             },
             data: {
-                'todo': todo_value,
+                'todo': event.target.value,
                 'id': id,
             },
         })
@@ -98,9 +97,7 @@ function edit_todo(id, event) {
             let result = response.data['is_success']
             if (result === true) {
                 alert('success');
-
-
-
+                document.querySelector('.m-btn').innerHTML = `수정!`
             } else {
                 alert('fail');
             }
