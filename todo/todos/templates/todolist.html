@@ -40,7 +40,7 @@
             </div>
             <div>
             <div class="input-4">
-                <input onclick="test()" class="btn btn-outline-dark" type="button" value="Click!">
+                <input class="btn btn-outline-dark" type="button" value="Click!">
             </div>
             </div>
         </form>
@@ -48,10 +48,13 @@
     <div class="Down-box">
         <ol class="Down-box1">
             {% for i in todos %}
-                <li>
+                <li class="todo_list">
                 {{i.todo}}
-                <a class='i-id'>{{i.id}}</a>
-                <button onclick="delete_todo({{i.id}})" class="btn_delete" value={{i.id}}>X</button> 
+                <p class='i-id'>{{i.id}}</p>
+                {% comment %} <div class ="btn-box"> {% endcomment %}
+                <button onclick="edit_todo({{i.id}}, event)" class="btn-edit" value={{i.id}}>M</button> 
+                <button onclick="delete_todo({{i.id}}, event)" class="btn_delete" value={{i.id}}>X</button> 
+                {% comment %} </div> {% endcomment %}
                 {% comment %} {{i.completed}} {% endcomment %}
                 </li>
             {% endfor %}
@@ -60,6 +63,7 @@
         </div>
     </div>
     </div>
+     <input class="item" type="text" style="cursor: pointer;" value=" " >
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>   
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

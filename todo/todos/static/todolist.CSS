@@ -116,20 +116,21 @@ form input {
   padding-left: 30px;
   display: inline-block;
 }
+
+
+
 .Down-box1  button {
   font-size:10px;
   font-weight: bolder;
-  float:right;
-  clear:both;
-}
-
-.Down-box1 hr {
-  margin-top:-15px;
 }
 
 .Down-box1:hover, .Down-box2:hover {
   box-shadow: 1px 1px 1px 1px white;
 }
+
+
+
+
 
 .Down-box2 {
   background-color:#f5f5f5;
@@ -146,3 +147,20 @@ form input {
 }
 
 
+.black-bg {
+  width : 100%;
+  height : 100%;
+  position : fixed;
+  background : rgba(0,0,0,0.5);
+  z-index : 5;
+  padding: 30px;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.5s;
+}
+
+.show-modal {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+}

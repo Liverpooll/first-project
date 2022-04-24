@@ -1,8 +1,8 @@
 let li = document.createElement("li");
 let inner_box = document.querySelector('.Down-box1');
-let span = document.createElement('span');
-let hr = document.createElement("hr");
 let del = document.createElement("button");
+let edit = document.createElement("button");
+
 let List = [];
 
 
@@ -33,15 +33,13 @@ const input_todo = function(event) {
             .then(function(response) {
                 let result = response.data['is_success']
                 let id = response.data['id'];
-                del.innerText = "x";
                 if (result == true) {
-                    let new_todo_li = '<li>'+todo_value + '&nbsp' + id + `<button onclick="delete_todo(${id})" class="x-btn">X</button>` + '</li>' + '<hr>'
+                    let new_todo_li = '<li>' + todo_value + '&nbsp' + id + `<button onclick="edit_todo(${id}, event)" class="m-btn">M</button>` + `<button style="display:inline-block" onclick="delete_todo(${id}, event)" class="x-btn">X</button>` + '</li>'
                     inner_box.innerHTML += new_todo_li;
-                    document.querySelector(".todoValue").value = ''
-                    console.log('todo value : ',todo_value)
+                    document.querySelector(".todoValue").value = null;
 
                 } else {
-                    alert('fail')
+                    alert('fail');
                 }
             })
             .catch((error) => {
@@ -54,11 +52,8 @@ const btn_outline_dark = document.querySelector(".btn-outline-dark");
 btn_outline_dark.addEventListener('click', input_todo);
 
 
-
-
-function delete_todo(id) {
-    let todo_value = document.querySelector(".todoValue").value;
-    axios({
+function delete_todo(id, event) { 
+        axios({
             url: `/todos/delete/`,
             method: 'post',
             headers: {
@@ -72,8 +67,8 @@ function delete_todo(id) {
         .then(function(response) {
             let result = response.data['is_success']
             if (result === true) {
-                alert('success');
-                deleteOne(event);
+                const removingOne = event.target.parentElement;
+                removingOne.remove();
 
             } else {
                 alert('fail')
@@ -85,10 +80,34 @@ function delete_todo(id) {
 };
 
 
-let event;
+function edit_todo(id, event) { 
+    let todo_value = document.querySelector(".todo_list");
+    axios({
+            url: `/todos/edit/`,
+            method: 'post',
+            headers: {
+                "content-type": "application/json",
+                'X-CSRFToken': getCsrfToken(),
+            },
+            data: {
+                'todo': todo_value,
+                'id': id,
+            },
+        })
+        .then(function(response) {
+            let result = response.data['is_success']
+            if (result === true) {
+                alert('success');
 
-let deleteOne = function (event) {
-    event = event;
-    const removingOne = event.target.parentElement;
-    removingOne.remove();
-}
+
+
+            } else {
+                alert('fail');
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+};
+
+
