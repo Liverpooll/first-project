@@ -94,3 +94,23 @@ class TodoEditView(View):
             'id': id,
         }
         return JsonResponse(context, safe=False)
+
+
+class TodoDone(View):
+    def post(self, request, *args, **kwargs):
+        data = json.loads(request.body.decode('utf-8'))
+        try:
+            todo= Todo.objects.get(id = data['id'])
+            todo.is_completed = True
+            todo.save()
+            result = True
+            id = todo.id
+        except Exception as e:
+            logging.info(e)
+            result = False
+            id = None
+        context = {
+            'is_success': result,
+            'id': id,
+        }
+        return JsonResponse(context, safe=False)
