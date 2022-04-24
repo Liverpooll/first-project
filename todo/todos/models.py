@@ -1,8 +1,9 @@
 from django.db import models
+from common.models import TimeStampedModel
 from accounts.models import User
 
 
-class Todo(models.Model):
+class Todo(TimeStampedModel):
     class Cycle(models.IntegerChoices):
         없음 = 0
         월 = 1
