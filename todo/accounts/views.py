@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, logout
+from django.contrib.auth import authenticate, login, logout
 
 from django.views import View
 
@@ -15,7 +15,14 @@ class LoginView(View):
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name)
     def post(self, request, *args, **kwargs):
-        return render(request, self.template_name)
+        email = request.POST.get('email')
+        password = request.POST.get('pw')
+        user = authenticate(request, email=email, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('todos:todolist')
+        else:
+            return render(request, self.template_name, context={'is_success': False})
 
 
 def logout(request):
