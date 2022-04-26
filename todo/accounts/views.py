@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth import login
 
 from django.views import View
 
@@ -7,10 +8,6 @@ from accounts.models import User
 import logging
 
 logging.basicConfig(level=logging.INFO)
-
-
-def login(request):
-    return render(request, 'login.html')
 
 
 class LoginView(View):
@@ -36,4 +33,5 @@ class SignupView(View):
         )
         user.nickname = request.POST.get('nickname')
         user.save()
+        login(request, user)
         return redirect('todos:todolist')
