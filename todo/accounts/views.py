@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 
 from django.views import View
 
@@ -19,7 +19,7 @@ class LoginView(View):
 
 
 def logout(request):
-    pass
+    logout(request)
 
 
 class SignupView(View):
