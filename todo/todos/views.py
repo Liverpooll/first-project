@@ -13,8 +13,13 @@ logging.basicConfig(level=logging.INFO)
 
 class TodoListView(ListView):
     model = Todo
-    context_object_name = 'todos'
     template_name = 'todolist.html'
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        context_data['todolist'] = Todo.objects.filter(is_active=False)
+        context_data['completed_list'] = Todo.objects.filter(is_active=True)
+        return context_data
 
 
 def async_test(request):
