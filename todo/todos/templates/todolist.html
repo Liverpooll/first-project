@@ -49,13 +49,8 @@
         <ol class="Down-box1">
             {% for i in todos %}
                 <li class="todo_list">
-                {{i.todo}}
-                <p class='i-id'>{{i.id}}</p>
-                {% comment %} <div class ="btn-box"> {% endcomment %}
-                <button onclick="edit_todo({{i.id}}, event)" class="btn-edit" value={{i.todo}}>M</button> 
-                <button onclick="delete_todo({{i.id}}, event)" class="btn_delete" value={{i.todo}}>X</button> 
-                {% comment %} </div> {% endcomment %}
-                {% comment %} {{i.completed}} {% endcomment %}
+                <p onclick="edit_todo({{i.id}}, event)" class="todo_list_div" value={{i.todo}}>{{i.todo}}</p>
+                <button onclick="delete_todo({{i.id}}, event)" class="btn_delete" value={{i.todo}}>X</button>
                 </li>
             {% endfor %}
         </ol>
@@ -63,7 +58,6 @@
         </div>
     </div>
     </div>
-     <input class="item" type="text" style="cursor: pointer;" value=" " >
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>   
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

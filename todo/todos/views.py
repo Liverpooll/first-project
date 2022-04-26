@@ -79,6 +79,7 @@ class TodoDeleteView(View):
 class TodoEditView(View):
     def post(self, request, *args, **kwargs):
         data = json.loads(request.body.decode('utf-8'))
+        logging.info(data['todo'])
         try:
             todo = Todo.objects.get(id = data['id'])
             todo.todo = data['todo']

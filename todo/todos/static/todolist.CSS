@@ -112,10 +112,16 @@ form input {
   width:100%;
 }
 
+.todo_list_div {
+  display: inline-block;
+  cursor: pointer;
+}
+
 .Down-box1  > ul {
   padding-left: 30px;
   display: inline-block;
 }
+
 
 
 
