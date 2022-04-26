@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from django.views import View
 
@@ -36,4 +36,4 @@ class SignupView(View):
         )
         user.nickname = request.POST.get('nickname')
         user.save()
-        return render(request, self.template_name)
+        return redirect('todos:todolist')
