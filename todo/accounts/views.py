@@ -35,4 +35,5 @@ class SignupView(View):
             request.POST.get('pw'),
         )
         user.nickname = request.POST.get('nickname')
+        user.save()
         return render(request, self.template_name)
