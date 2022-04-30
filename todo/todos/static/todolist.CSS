@@ -114,7 +114,6 @@ form input {
 
 .todo_list_div {
   display: inline-block;
-  cursor: pointer;
 }
 
 .Down-box1  > ul {
@@ -170,3 +169,4 @@ form input {
   opacity: 1;
   visibility: visible;
 }
+

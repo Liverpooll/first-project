@@ -1,9 +1,11 @@
-let li = document.createElement("li");
-let inner_box = document.querySelector('.Down-box1');
-let del = document.createElement("button");
-let edit = document.createElement("button");
-
-let List = [];
+const li = document.createElement("li");
+const inner_box = document.querySelector('.Down-box1');
+const button = document.createElement("button");
+const button_1 = document.createElement("button");
+const div = document.createElement("div");
+const x_btn = document.createTextNode('X');
+const m_btn = document.createTextNode('M');
+const nbsp = document.createTextNode('\u00a0\u00a0')
 
 
 
@@ -24,7 +26,8 @@ document.querySelector('.todoValue').addEventListener('keyup', (e)=>{
 
 const create_todo = function(event) {
     // event.preventDefault();
-    let todo_value = document.querySelector(".todoValue").value;
+    let todo_value = $(".todoValue").val();
+
     if (todo_value == '') {
         alert('뭐라도 입력해봐');
     } else {
@@ -42,15 +45,63 @@ const create_todo = function(event) {
             .then(function(response) {
                 let result = response.data['is_success']
                 let id = response.data['id'];
+                
                 if (result == true) {
-                    let new_todo_li = `<li> 
-                    <div class=todo_list_div value=${todo_value} onclick="edit_todo(${id}, event)"> 
-                    ${todo_value} 
-                    </div> &nbsp <button onclick="delete_todo(${id}, event)"
-                     class="btn_delete">X</button></li>`
-                    inner_box.innerHTML += new_todo_li;
-                    document.querySelector(".todoValue").value = null;
+                    let node_list = document.querySelectorAll('.todo_list_div');
+                    const li = document.createElement("li");
+                    const button = document.createElement("button");
+                    const button_1 = document.createElement("button");
+                    const div = document.createElement("div");
+                    const x_btn = document.createTextNode('X');
+                    const m_btn = document.createTextNode('M');
+                    const nbsp = document.createTextNode('\u00a0\u00a0')
+                    li.classList.add('todo_list');
+                    div.id = node_list.length + 1;
+                    div.classList.add('todo_list_div');
+                    div.innerHTML = todo_value;
+                    button.innerHTML = 'M';
+                    button.classList.add('btn_edit');
+                    button_1.innerHTML = 'X';
+                    button_1.classList.add('btn_delete');
+                    button.value = node_list.length + 1;
+                    button_1.value = node_list.length + 1;
 
+
+                    // inner_box.appendChild(li);
+                    // inner_box.insertAdjacentHTML('beforeend', li);
+                    li.appendChild(div);
+                    li.appendChild(nbsp);
+                    li.appendChild(button);
+                    li.appendChild(button_1);
+                    inner_box.appendChild(li);
+                    // console.log(nbsp.parentElement)
+                    console.log(button_1.parentElement)
+                    button.addEventListener('click', function (id, event) {
+                        real_edit(id, event)
+                    });
+                    button_1.addEventListener('click', function(event){
+                        
+                        delete_todo(id, event)
+                    });
+                    
+                    
+
+
+                    // let new_todo_li = `<li class="todo_list"> 
+                    // <div id="${node_list.length}"class="todo_list_div">
+                    // ${todo_value}
+                    // </div>
+                    // &nbsp
+                    // <button onclick="real_edit(${id}, event)" value="${node_list.length}" class="btn_edit" class="display_None">
+                    // M</button> 
+                    // <button onclick="delete_todo(${id}, event)"class="btn_delete">
+                    // X</button>
+                    // </li>`
+                    // inner_box.innerHTML += li;
+                    document.querySelector(".todoValue").value = null;
+                         
+                    
+                    
                 } else {
                     alert('fail');
                 }
@@ -63,14 +114,14 @@ const create_todo = function(event) {
 // Create
 
 
-const btn_outline_dark = document.querySelector(".btn-outline-dark");
-btn_outline_dark.addEventListener('click', create_todo);
+// const btn_outline_dark = document.querySelector(".btn-outline-dark");
+// btn_outline_dark.addEventListener('click', create_todo);
 
 
 
 // delete
 function delete_todo(id, event) { 
-
+    
         axios({
             url: `/todos/delete/`,
             method: 'post',
@@ -86,6 +137,7 @@ function delete_todo(id, event) {
             let result = response.data['is_success']
             if (result === true) {
                 const removingOne = event.target.parentElement;
+                // console.log(removingOne)
                 removingOne.remove();
 
             } else {
@@ -130,10 +182,18 @@ function edit_todo(id, event) {
 // edit
 
 // real_edit
-let real_edit = function(content, id, event) {
-    console.log(content.innerHTML);
-    let new_todo_input = `<input type="text" class="new_todo_input" placeholder="${content.innerHTML}"></input>`
-    content.innerHTML = new_todo_input;
+let real_edit = function(id, event) {
+    let test_event = event;
+    let node_id = test_event.target.value;
+    console.log(node_id);
+    let content = document.querySelectorAll('.todo_list_div')[node_id];
+    let removeButton = $('.btn_edit');
+
+    let node_list = document.querySelectorAll('.todo_list_div');
+    
+    let new_todo_input = `<input type="text" class="new_todo_input" placeholder="${content.innerHTML}">
+    </input>`
+    content.innerHTML = new_todo_input
     $('.new_todo_input').keydown((key) => {
         if (key.keyCode === 13) {
             let new_todo_value = $(".new_todo_input").val();

@@ -40,17 +40,19 @@
             </div>
             <div>
             <div class="input-4">
-                <input class="btn btn-outline-dark" type="button" value="Click!">
+                <input onclick="create_todo(event)" class="btn btn-outline-dark" type="button" value="Click!">
             </div>
             </div>
         </form>
     </div>
     <div class="Down-box">
         <ol class="Down-box1">
-            {% for i in todos %}
+            {% for i in todolist %}
                 <li class="todo_list">
-                <p onclick="edit_todo({{i.id}}, event)" class="todo_list_div" value={{i.todo}}>{{i.todo}}</p>
-                <button onclick="delete_todo({{i.id}}, event)" class="btn_delete" value={{i.todo}}>X</button>
+                <div id="{{forloop.counter}}" class="todo_list_div">{{i.todo}}</div>
+                &nbsp
+                <button onclick="real_edit({{i.id}}, event)" value="{{forloop.counter}}" class="btn_edit">M</button>
+                <button onclick="delete_todo({{i.id}}, event)" class="btn_delete">X</button>
                 </li>
             {% endfor %}
         </ol>
