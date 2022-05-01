@@ -1,11 +1,5 @@
-const li = document.createElement("li");
 const inner_box = document.querySelector('.Down-box1');
-const button = document.createElement("button");
-const button_1 = document.createElement("button");
-const div = document.createElement("div");
-const x_btn = document.createTextNode('X');
-const m_btn = document.createTextNode('M');
-const nbsp = document.createTextNode('\u00a0\u00a0')
+
 
 
 
@@ -47,40 +41,35 @@ const create_todo = function(event) {
                 let id = response.data['id'];
                 
                 if (result == true) {
-                    let node_list = document.querySelectorAll('.todo_list_div');
+                    const node_list = document.querySelectorAll('.todo_list_div');
                     const li = document.createElement("li");
                     const button = document.createElement("button");
                     const button_1 = document.createElement("button");
                     const div = document.createElement("div");
-                    const x_btn = document.createTextNode('X');
-                    const m_btn = document.createTextNode('M');
                     const nbsp = document.createTextNode('\u00a0\u00a0')
                     li.classList.add('todo_list');
-                    div.id = node_list.length + 1;
+                    div.id = node_list.length;
                     div.classList.add('todo_list_div');
                     div.innerHTML = todo_value;
                     button.innerHTML = 'M';
                     button.classList.add('btn_edit');
+                    button.id = id
+                    button.value = node_list.length;
                     button_1.innerHTML = 'X';
                     button_1.classList.add('btn_delete');
-                    button.value = node_list.length + 1;
-                    button_1.value = node_list.length + 1;
+                    button.id = id;
+                    button_1.value = node_list.length;
 
-
-                    // inner_box.appendChild(li);
-                    // inner_box.insertAdjacentHTML('beforeend', li);
                     li.appendChild(div);
                     li.appendChild(nbsp);
                     li.appendChild(button);
                     li.appendChild(button_1);
                     inner_box.appendChild(li);
-                    // console.log(nbsp.parentElement)
-                    console.log(button_1.parentElement)
-                    button.addEventListener('click', function (id, event) {
-                        real_edit(id, event)
+
+                    button.addEventListener('click', (event) => {
+                        real_edit(id, event, button)
                     });
-                    button_1.addEventListener('click', function(event){
-                        
+                    button_1.addEventListener('click', (event) => {
                         delete_todo(id, event)
                     });
                     
@@ -92,8 +81,6 @@ const create_todo = function(event) {
                     // ${todo_value}
                     // </div>
                     // &nbsp
-                    // <button onclick="real_edit(${id}, event)" value="${node_list.length}" class="btn_edit" class="display_None">
-                    // M</button> 
                     // <button onclick="delete_todo(${id}, event)"class="btn_delete">
                     // X</button>
                     // </li>`
@@ -149,11 +136,13 @@ function delete_todo(id, event) {
         })
 };
 // delete
-let event_value = ''
+
+
+
 // edit 수정!
-function edit_todo(id, event) {
-    event_value = event.target; 
-    let content = event.target;
+function edit_todo(id, node_id, button) {
+    const content = document.querySelector('.new_input').value;
+    console.log(button)
     axios({
             url: `/todos/edit/`,
             method: 'post',
@@ -162,14 +151,28 @@ function edit_todo(id, event) {
                 'X-CSRFToken': getCsrfToken(),
             },
             data: {
-                'todo': content.innerHTML,
+                'todo': content,
                 'id': id,
             },
         })
         .then(function(response) {
             let result = response.data['is_success']
             if (result === true) {
-                real_edit(content, event);
+                const new_div = document.createElement('div'); 
+                const list_id = document.querySelectorAll('.todo_list_div')[node_id];
+                new_div.classList.add('.new_div');
+                new_div.innerHTML = content;
+                new_div.style.cssText = 'display:inline-block';
+            
+                list_id.replaceChild(new_div, list_id.firstChild);
+                list_id.replaceChild(button, list_id.childNodes[1]);
+                
+
+
+
+
+
+              
       
             } else {
                 alert('fail');
@@ -179,33 +182,81 @@ function edit_todo(id, event) {
             console.log(error);
         })
 };
-// edit
+// // edit
 
 // real_edit
-let real_edit = function(id, event) {
-    let test_event = event;
-    let node_id = test_event.target.value;
-    console.log(node_id);
-    let content = document.querySelectorAll('.todo_list_div')[node_id];
-    let removeButton = $('.btn_edit');
 
-    let node_list = document.querySelectorAll('.todo_list_div');
+let event_test = '';
+const real_edit = function (id, event, button) {
+    let node_id = event.target.value;
+    const list_id = document.querySelectorAll('.todo_list_div')[node_id];
+    const new_input = document.createElement('input');
+    const button_2 = document.createElement('button');
     
-    let new_todo_input = `<input type="text" class="new_todo_input" placeholder="${content.innerHTML}">
-    </input>`
-    content.innerHTML = new_todo_input
-    $('.new_todo_input').keydown((key) => {
+    button_2.type = 'button';
+    button_2.innerText = '수정!';
+    button_2.classList.add('new_button');
+    new_input.type = 'text';
+    new_input.placeholder = list_id.innerHTML;
+    new_input.classList.add('new_input');
+
+
+
+    list_id.replaceChild(new_input, list_id.firstChild);
+    $(event.target).remove();
+    list_id.append(button_2);
+    const new_todo_input1 = document.querySelector('.new_todo_input');
+
+    button_2.addEventListener('click', () => {
+        edit_todo(id, node_id, button);
+    });
+
+
+
+    $('.new_input').keydown((key) => {
         if (key.keyCode === 13) {
-            let new_todo_value = $(".new_todo_input").val();
-            let new_todo_li = `
-            <p class="todo_list_div" value=${new_todo_value} onclick="input_todo(${id}, event)"> 
-            ${new_todo_value}
-            </p>`
-            if (new_todo_value == '') {
-                alert('최소 1자 이상 입력해주세요')
-            } else {
-                content.innerHTML = new_todo_li;
-            }
+            edit_todo(id, node_id, button);
         }
     });
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const test_event = '';
+// let real_edit = function(id, event) {
+//     let node_id = event.target.value;
+//     console.log(node_id)
+//     let content = document.querySelectorAll('.todo_list_div')[node_id];
+//     let node_list = document.querySelectorAll('.todo_list_div');
+    
+    
+//     let new_todo_input = `<input type="text" class="new_todo_input" placeholder="${content.innerHTML}">
+//     </input>`
+//     content.innerHTML = new_todo_input
+//     $('.new_todo_input').keydown((key) => {
+//         if (key.keyCode === 13) {
+//             let new_todo_value = $(".new_todo_input").val();
+//             let new_todo_li = `
+//             <p class="todo_list_div" value=${new_todo_value} onclick="input_todo(${id}, event)"> 
+//             ${new_todo_value}
+//             </p>`
+//             if (new_todo_value == '') {
+//                 alert('최소 1자 이상 입력해주세요')
+//             } else {
+//                 content.innerHTML = new_todo_li;
+//             }
+//         }
+//     });
+// }

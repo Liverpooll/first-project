@@ -116,6 +116,8 @@ form input {
   display: inline-block;
 }
 
+
+
 .Down-box1  > ul {
   padding-left: 30px;
   display: inline-block;
@@ -151,6 +153,9 @@ form input {
   display: inline-block;
 }
 
+.todo_list_div {
+  display: inline-block;
+}
 
 .black-bg {
   width : 100%;
