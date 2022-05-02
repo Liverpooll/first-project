@@ -40,7 +40,7 @@
             </div>
             <div>
             <div class="input-4">
-                <input onclick="create_todo(event)" class="btn btn-outline-dark" type="button" value="Click!">
+                <input onclick="create_todo(event)"class="btn btn-outline-dark" type="button" value="Click!">
             </div>
             </div>
         </form>
@@ -51,8 +51,8 @@
                 <li class="todo_list">
                 <div id="{{forloop.counter0}}" class="todo_list_div">{{i.todo}}</div>
                 &nbsp
-                <button onclick="real_edit({{i.id}}, event)" value="{{forloop.counter0}}" class="btn_edit">M</button>
-                <button onclick="delete_todo({{i.id}}, event)" class="btn_delete">X</button>
+                <button onclick="change_input_onclick({{i.id}}, event)" value="{{forloop.counter0}}" class="btn_edit">M</button>
+                <button onclick="delete_onclick({{i.id}}, event)" class="btn_delete">X</button>
                 </li>
             {% endfor %}
         </ol>
@@ -63,6 +63,6 @@
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>   
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="/static/todolist.JS" defer></script>
+    <script src="/static/exam.JS" defer></script>
 </body>
 </html>
