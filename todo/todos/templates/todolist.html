@@ -48,11 +48,10 @@
     <div class="Down-box">
         <ol class="Down-box1">
             {% for i in todolist %}
-                <li class="todo_list">
+                <li class="todo_list_li">
                 <div id="{{forloop.counter0}}" class="todo_list_div">{{i.todo}}</div>
-                &nbsp
-                <button onclick="change_input_onclick({{i.id}}, event)" value="{{forloop.counter0}}" class="btn_edit">M</button>
-                <button onclick="delete_onclick({{i.id}}, event)" class="btn_delete">X</button>
+                <button onclick="change_input_onclick({{i.id}}, event)" class="btn_edit" value="{{forloop.counter0}}">M</button>
+                <button onclick="delete_onclick({{i.id}}, event)" class="btn_delete" value="{{forloop.counter0}}">X</button>
                 </li>
             {% endfor %}
         </ol>

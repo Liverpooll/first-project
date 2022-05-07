@@ -67,7 +67,7 @@ const create_todo = function(event) {
                     inner_box.appendChild(li);
 
                     button.addEventListener('click', (event) => {
-                        real_edit(id, event, button)
+                        real_edit(id, event)
                     });
                     button_1.addEventListener('click', (event) => {
                         delete_todo(id, event)
@@ -138,11 +138,10 @@ function delete_todo(id, event) {
 // delete
 
 
-
+// 에디트할 실제 데이터 보내는 함수
 // edit 수정!
-function edit_todo(id, node_id, button) {
+function edit_todo(id, node_id) {
     const content = document.querySelector('.new_input').value;
-    console.log(button)
     axios({
             url: `/todos/edit/`,
             method: 'post',
@@ -158,21 +157,24 @@ function edit_todo(id, node_id, button) {
         .then(function(response) {
             let result = response.data['is_success']
             if (result === true) {
+                const node_list = document.querySelectorAll('.todo_list_div');
                 const new_div = document.createElement('div'); 
                 const list_id = document.querySelectorAll('.todo_list_div')[node_id];
+                const button = document.createElement("button");
+                button.innerHTML = 'M';
+                button.classList.add('btn_edit');
+                button.id = id
+                button.value = node_list.length;
                 new_div.classList.add('.new_div');
                 new_div.innerHTML = content;
                 new_div.style.cssText = 'display:inline-block';
             
-                list_id.replaceChild(new_div, list_id.firstChild);
+                list_id.replaceChild(new_div, list_id.childNodes[0]);
                 list_id.replaceChild(button, list_id.childNodes[1]);
-                
-
-
-
-
-
-              
+                            
+                button.addEventListener('click', (event) => {
+                    real_edit(id, event)
+                });
       
             } else {
                 alert('fail');
@@ -184,10 +186,13 @@ function edit_todo(id, node_id, button) {
 };
 // // edit
 
+                
+
+
 // real_edit
 
-let event_test = '';
-const real_edit = function (id, event, button) {
+// 수정버튼으로 바뀌는 함수
+const real_edit = function (id, event) {
     let node_id = event.target.value;
     const list_id = document.querySelectorAll('.todo_list_div')[node_id];
     const new_input = document.createElement('input');
@@ -205,17 +210,16 @@ const real_edit = function (id, event, button) {
     list_id.replaceChild(new_input, list_id.firstChild);
     $(event.target).remove();
     list_id.append(button_2);
-    const new_todo_input1 = document.querySelector('.new_todo_input');
 
     button_2.addEventListener('click', () => {
-        edit_todo(id, node_id, button);
+        edit_todo(id, node_id);
     });
 
 
 
     $('.new_input').keydown((key) => {
         if (key.keyCode === 13) {
-            edit_todo(id, node_id, button);
+            edit_todo(id, node_id);
         }
     });
 }
