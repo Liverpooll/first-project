@@ -40,7 +40,7 @@
             </div>
             <div>
             <div class="input-4">
-                <input onclick="create_todo(event)"class="btn btn-outline-dark" type="button" value="Click!">
+                <input onclick="create_todo()"class="btn btn-outline-dark" type="button" value="Click!">
             </div>
             </div>
         </form>
@@ -49,8 +49,9 @@
         <ol class="Down-box1">
             {% for i in todolist %}
                 <li class="todo_list_li">
-                <div id="{{forloop.counter0}}" class="todo_list_div">{{i.todo}}</div>
-                <button onclick="change_input_onclick({{i.id}}, event)" class="btn_edit" value="{{forloop.counter0}}">M</button>
+                <input type="radio" onclick="done_onclick({{i.id}}, event)" class="btn_done"></input>
+                <span id="{{forloop.counter0}}" style="cursor:pointer" onclick="change_input_onclick({{i.id}}, event)">{{i.todo}}</span>
+                {% comment %} <button onclick="change_input_onclick({{i.id}}, event)" class="btn_edit" value="{{forloop.counter0}}">M</button> {% endcomment %}
                 <button onclick="delete_onclick({{i.id}}, event)" class="btn_delete" value="{{forloop.counter0}}">X</button>
                 </li>
             {% endfor %}
