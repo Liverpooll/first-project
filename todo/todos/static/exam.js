@@ -238,6 +238,7 @@ function done_onclick(id, event) {
         .then(function(response) {
             let result = response.data['is_success']
             if (result === true) {
+                console.log(id)
 
             } else {
                 alert('fail')
