@@ -51,12 +51,12 @@ function create_todo(id) {
                     let radio = document.createElement('input');
 
 
-                    radio.type = 'radio';
+                    radio.type = 'checkbox';
                     radio.setAttribute('onclick', `done_onclick(${id},event)`);
                     radio.classList.add('btn_done');
 
                     span.innerText = todo_input.value;
-                    span.style.cursor="pointer"
+                    span.style.cursor = "pointer"
                     span.setAttribute("onclick", `change_input_onclick(${id}, event)`);
                     li.classList.add('todo_list_li');
 
@@ -88,13 +88,13 @@ function create_todo(id) {
 }
 
 
+
 // 체인지 인풋 온클릭 함수에서 누는 수정완료 버튼이 클릭 됐을 때 연결되는 함수
 function edit_success_onclick(id, event) {
-    let event_target = event.target.value;
-    console.log(event_target)
+
+
     let new_input = document.querySelector('.new_input');
     let event_parent = event.target.parentElement;
-    let firstNode = event_parent.children[0];
     let secondNode = event_parent.children[1];
     let thirdNode = event_parent.children[2];
     let M_button = document.createElement('button');
@@ -102,23 +102,18 @@ function edit_success_onclick(id, event) {
     let radio = document.createElement('input');
 
 
-    radio.type = 'radio';
+
+    radio.type = 'checkbox';
     radio.setAttribute('onclick', `done_onclick(${id},event)`);
     radio.classList.add('btn_done');
 
-
     span.innerText = new_input.value;
-
-    span.style.cursor="pointer"
+    span.style.cursor = "pointer"
     span.setAttribute("onclick", `change_input_onclick(${id}, event)`);
-
 
     M_button.innerText = 'M'
     M_button.setAttribute("onclick", `change_input_onclick(${id}, event)`);
     M_button.classList.add('btn_edit');
-
-
-
 
     // 1. 해당 노드의 정보 받기
     // 2. 비동기 통신 보내기.
@@ -140,12 +135,12 @@ function edit_success_onclick(id, event) {
         .then(function(response) {
             let result = response.data['is_success']
             if (result === true) {
-
+                if (new_input.value === '') {
+                    alert('수정해주세요');
+                } else {
                 event_parent.replaceChild(span, secondNode);
                 event_parent.removeChild(thirdNode);
-                // event_parent.replaceChild(M_button, secondNode)
-
-
+                }
             } else {
                 alert('fail');
             }
@@ -156,41 +151,33 @@ function edit_success_onclick(id, event) {
 
 }
 
-let test_event;
 
 function change_input_onclick(id, event) {
-    test_event = event;
 
     // 1. 해당 노드의 정보 받기.
     // 2. 그 노드를 인풋 텍스트로 바꾸기
     // 3. 버튼도 이제 수정완료로 바꾸기. !! 온클릭 이벤트 제대로 연결줘야함
     let Edit_button = document.createElement('button');
-    let New_input = document.createElement('input');
+    let new_input = document.createElement('input');
+    let current_input = document.querySelector('.new_input');
     let event_parent = event.target.parentElement;
-    let event_child = event_parent.children;
-    let firstNode = event_parent.children[0];
     let secondNode = event_parent.children[1];
     let thirdNode = event_parent.children[2];
 
 
-
-
-    console.log(event_child);
     Edit_button.innerText = '수정!'
     Edit_button.setAttribute("onclick", `edit_success_onclick(${id}, event)`);
 
-    New_input.classList.add('new_input');
-    New_input.classList.add('todo_list_li');
-    event_parent.replaceChild(New_input ,secondNode);
+    new_input.classList.add('new_input');
+    new_input.classList.add('todo_list_li');
+
+    if (current_input) {
+        alert('한번에 하나만 수정해주세욥');
+    } else{
+    event_parent.replaceChild(new_input, secondNode);
     event_parent.replaceChild(Edit_button, thirdNode);
     event_parent.appendChild(thirdNode);
-    
-    // event_parent.removeChild(secondNode);
-    // event_parent.appendChild(Edit_button);
-    // event_parent.prepend(New_input);
-
-
-
+    }
     $('.new_input').keydown((key) => {
         if (key.keyCode === 13) {
             edit_success_onclick(id, event);
@@ -235,31 +222,28 @@ function delete_onclick(id, event) {
 
 
 
-// function done_onclick(id, event) {
-//     // 1. 해당 노드의 정보 받기
-//     // 2. 비동기 통신 보내기
-//     // 3. 성공하면 해당 노드 회색으로.
-//     //4. 실패하면 안되게 하기
-//     axios({
-//             url: `/todos/done/`,
-//             method: 'post',
-//             headers: {
-//                 "content-type": "application/json",
-//                 'X-CSRFToken': getCsrfToken(),
-//             },
-//             data: {
-//                 'id': id,
-//             },
-//         })
-//         .then(function(response) {
-//             let result = response.data['is_success']
-//             if (result === true) {
-                
-//             } else {
-//                 alert('fail')
-//             }
-//         })
-//         .catch((error) => {
-//             console.log(error)
-//         })
-// }
+function done_onclick(id, event) {
+
+    axios({
+            url: `/todos/done/`,
+            method: 'post',
+            headers: {
+                "content-type": "application/json",
+                'X-CSRFToken': getCsrfToken(),
+            },
+            data: {
+                'id': id,
+            },
+        })
+        .then(function(response) {
+            let result = response.data['is_success']
+            if (result === true) {
+
+            } else {
+                alert('fail')
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+}
