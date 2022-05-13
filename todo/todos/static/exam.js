@@ -4,6 +4,7 @@ const form_box = document.querySelector('.form-box');
 const todo_input = document.querySelector('.todoValue');
 const submit_btn = document.querySelector('.btn-outline-dark');
 const inner_box = document.querySelector('.Down-box1');
+const nbsp = '&nbsp'
 
 
 function getCsrfToken() {
@@ -46,25 +47,26 @@ function create_todo(id) {
                 if (result == true) {
                     let li = document.createElement('li');
                     let span = document.createElement('span');
-                    let M_button = document.createElement('button');
-                    let X_button = document.createElement('button');
+                    let X_button = document.createElement('input');
                     let radio = document.createElement('input');
 
 
                     radio.type = 'checkbox';
                     radio.setAttribute('onclick', `done_onclick(${id},event)`);
                     radio.classList.add('btn_done');
+                    radio.style.marginTop = "17px"
 
                     span.innerText = todo_input.value;
                     span.style.cursor = "pointer"
+                    span.style.marginLeft = "11px"
                     span.setAttribute("onclick", `change_input_onclick(${id}, event)`);
+                    span.style.fontSize = "13px"
                     li.classList.add('todo_list_li');
 
-                    M_button.innerText = 'M'
-                    M_button.setAttribute("onclick", `change_input_onclick(${id}, event)`);
-                    M_button.classList.add('btn_edit');
 
                     X_button.innerText = 'X';
+                    X_button.type = 'button';
+                    X_button.value = 'X';
                     X_button.setAttribute("onclick", `delete_onclick(${id}, event)`);
                     X_button.classList.add('btn_delete');
 
@@ -97,7 +99,7 @@ function edit_success_onclick(id, event) {
     let event_parent = event.target.parentElement;
     let secondNode = event_parent.children[1];
     let thirdNode = event_parent.children[2];
-    let M_button = document.createElement('button');
+
     let span = document.createElement('span');
     let radio = document.createElement('input');
 
@@ -110,10 +112,6 @@ function edit_success_onclick(id, event) {
     span.innerText = new_input.value;
     span.style.cursor = "pointer"
     span.setAttribute("onclick", `change_input_onclick(${id}, event)`);
-
-    M_button.innerText = 'M'
-    M_button.setAttribute("onclick", `change_input_onclick(${id}, event)`);
-    M_button.classList.add('btn_edit');
 
     // 1. 해당 노드의 정보 받기
     // 2. 비동기 통신 보내기.

@@ -1,33 +1,123 @@
 body {
   margin: 0;
-  background: #292f35;
+  background: #d9d9d9;
   font-weight: bold;
 }
   
-  div {
-  box-sizing: border-box;
+div {
+  box-sizing: border-box; 
 }
-
+hr {
+  width:90%;
+  margin-left : auto;
+  margin-right : auto;
+}
+    
 .wrapper {
+  width:100%;
+  height:100%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
-.title {
-  font-size: 70px;
-  color:white;
-  margin-top:40px;
+.todo-box {
+  width:350px;
+  height:600px;
+  background-color: white;
+  margin:auto;
+  margin-top:20px;
 }
 
-.title:hover {
-  color: #80b7ed
+.header {
+  width:100%;
+  height:50px;
+  background-color: #C62828;
 }
+
+.header span {
+  color: white;
+  line-height: 50px;
+  vertical-align: middle;
+  margin-left:20px;
+}
+
+.header-2 {
+  width:100%;
+  height:60px;
+  background-color: rgb(255, 255, 255);
+}
+
+.header-2 p {
+  font-size:15px;
+  padding:17px 0px 0px 20px;
+}
+
+.header-2 hr {
+  margin-top:-5px;
+  border:solid 1px black;
+}
+
+.input-header {
+  width:100%;
+  height:80px;
+  background-color: rgba(225, 224, 224, 0.934);
+}
+
+.todoValue {
+  width:80%;
+  height:35px;
+  margin:auto;
+  margin-top:10px;
+  /* border: none; */
+  border:solid 3px #C62828;
+  border-top:5px;
+  border-left:5px;
+  border-right:5px;
+  padding-left:10px;
+  font-weight: 600;
+  font-size:13px;
+}
+
+.todoValue:hover {
+  box-shadow: 1px 1px 1px 0px grey;
+}
+
+.todoValue:focus {
+  outline: none;
+}
+
+.todoValue::placeholder {
+  font-weight:600;
+  font-size:13px;
+}
+
+.input-header hr{
+  margin-top: 5px;
+  border:solid 1px black;
+}
+
+.input-header p {
+  cursor:pointer;
+  font-weight: 600;
+  font-size: 13px;
+  float:right;
+  margin-top:-17px;
+  clear:both;
+}
+
+
+
+
+
+
+
+
+
+
 
 .Up-box {
   background-color:  #ffffff;
-  width: 850px;
-  height: 120px;
+  width: 100%;
+  height: 100%;
   border: 2px solid rgb(255, 255, 255);
   margin-top: 50px;
   display: flex;
@@ -38,92 +128,36 @@ body {
   display: flex;
   justify-content: space-between;
 }
-.form-box > div{
-  padding:10px
-}
-.Up-box form{
-  padding:20px;
-}
-.mb-3 {
-  width:150px;
-}
 
 
 
-.input-1, .input-2, .input-3 {
-  display: flex;
-  flex-direction: column;
-}
 
-.form-control {
-  border: 1px solid black;
-}
-
-.input-3 {
-  width:250px;
-  font-size: 13px;
-}
-
-.todoValue {
-  border-radius: 10px;
-  height:40px;
-}
-
-.todoValue:hover {
-  box-shadow: 1px 1px 1px 1px grey;
-}
-
-.todoValue:focus {
-  outline: none;
-}
-
-.input-4 {
-  margin-top:25px;
-}
-
-form input {
-  margin-top:10px;
-}
 
 
 .Down-box {
-  display: flex;
-  width:850px;
-  justify-content: space-between;
+  width:100%;
+  height:410px;
+  flex-direction: column;
+  background-color: rgb(255, 255, 255);
 }
 
 .Down-box1 {
-  background-color:#f5f5f5;
-  width: 400px;
-  height: 300px;
-  margin-top:50px;
-  border: none;
-  border-radius: 20px;
-  padding:20px;
-  color: #292f35;
-  font-weight:bolder;
-  list-style-position:inside;
-  display: inline-block;
-}
-
-.Down-box1 > hr {
-  background-color: grey;
-  height: 3px;
   width:100%;
+  margin-right:10px;
 }
 
-.todo_list_div {
-  display: inline-block;
+.Down-box  hr {
+  background-color: rgb(0, 0, 0);
+  width:90%;
+  border: 1px solid rgb(226, 226, 226);
+  margin-top:40px;
+  position: absolute;
+  margin-left:18px;
 }
 
-
-
-.Down-box1  > ul {
-  padding-left: 30px;
-  display: inline-block;
+.todo_list_li {
+  margin-left:-15px;
 }
-
-
 
 
 .Down-box1  button {
@@ -131,61 +165,39 @@ form input {
   font-weight: bolder;
 }
 
-.Down-box1:hover, .Down-box2:hover {
-  box-shadow: 1px 1px 1px 1px white;
-}
 
-
-
-
-
-.Down-box2 {
-  background-color:#f5f5f5;
-  width: 400px;
-  height: 300px;
-  margin-top:50px;
-  border: none;
-  border-radius: 20px;
-
-}
-
-
-
-/* .black-bg {
-  width : 100%;
-  height : 100%;
-  position : fixed;
-  background : rgba(0,0,0,0.5);
-  z-index : 5;
-  padding: 30px;
-  visibility: hidden;
-  opacity: 0;
-  transition: all 0.5s;
-}
-
-.show-modal {
-  display: block;
-  opacity: 1;
-  visibility: visible;
-} */
 
 .todo_list_li form {
   display: inline-block;
   color: blue;
 }
 
+
+
 input[type="checkbox"] {
-  width: 1rem;
-  height: 1rem;
+  width: 0.8rem;
+  height: 0.8rem;
   border-radius: 50%;
-  border: 1px solid #999;
-  margin-top:2px;
+  border: 1px solid rgb(0, 0, 0);
+  margin-top:15px;
   appearance: none;
   cursor: pointer;
   transition: background 0.2s;
 }
 
 input[type="checkbox"]:checked {
-  background: #dc635c;
+  background: #C62828;
   border: none;
 }
+
+.btn_delete {
+  float:right;
+  clear:both;
+  margin-top:-20px;
+  margin-right:5px;
+  border:0;
+  background-color: rgb(255, 255, 255);
+  color:#C62828;
+  font-weight:600;
+}
+
