@@ -6,6 +6,7 @@ const submit_btn = document.querySelector('.btn-outline-dark');
 const inner_box = document.querySelector('.Down-box1');
 
 
+
 function getCsrfToken() {
     return document.cookie.split(';')
         .find((item) => item.includes('csrftoken'))
@@ -46,31 +47,37 @@ function create_todo(id) {
                 if (result == true) {
                     let li = document.createElement('li');
                     let span = document.createElement('span');
-                    let M_button = document.createElement('button');
-                    let X_button = document.createElement('button');
+                    let X_button = document.createElement('input');
                     let radio = document.createElement('input');
+                    let hr = document.createElement('hr');
 
 
                     radio.type = 'checkbox';
+                    radio.style.marginLeft = '17px'
                     radio.setAttribute('onclick', `done_onclick(${id},event)`);
                     radio.classList.add('btn_done');
 
+
                     span.innerText = todo_input.value;
                     span.style.cursor = "pointer"
+                    span.style.marginLeft = '10px'
+
                     span.setAttribute("onclick", `change_input_onclick(${id}, event)`);
                     li.classList.add('todo_list_li');
 
-                    M_button.innerText = 'M'
-                    M_button.setAttribute("onclick", `change_input_onclick(${id}, event)`);
-                    M_button.classList.add('btn_edit');
 
                     X_button.innerText = 'X';
+                    X_button.type = 'button';
+                    X_button.value = 'X';
                     X_button.setAttribute("onclick", `delete_onclick(${id}, event)`);
                     X_button.classList.add('btn_delete');
+                    X_button.style.marginTop = '7px';
 
+                    
                     li.appendChild(radio);
                     li.appendChild(span);
                     li.appendChild(X_button);
+                    li.appendChild(hr);
 
                     inner_box.appendChild(li);
 
@@ -97,7 +104,7 @@ function edit_success_onclick(id, event) {
     let event_parent = event.target.parentElement;
     let secondNode = event_parent.children[1];
     let thirdNode = event_parent.children[2];
-    let M_button = document.createElement('button');
+
     let span = document.createElement('span');
     let radio = document.createElement('input');
 
@@ -110,10 +117,6 @@ function edit_success_onclick(id, event) {
     span.innerText = new_input.value;
     span.style.cursor = "pointer"
     span.setAttribute("onclick", `change_input_onclick(${id}, event)`);
-
-    M_button.innerText = 'M'
-    M_button.setAttribute("onclick", `change_input_onclick(${id}, event)`);
-    M_button.classList.add('btn_edit');
 
     // 1. 해당 노드의 정보 받기
     // 2. 비동기 통신 보내기.
@@ -221,7 +224,7 @@ function delete_onclick(id, event) {
 }
 
 
-
+let event1 = '';
 function done_onclick(id, event) {
 
     axios({
@@ -238,7 +241,18 @@ function done_onclick(id, event) {
         .then(function(response) {
             let result = response.data['is_success']
             if (result === true) {
-                console.log(id)
+                let event1 = event.target;
+                let parents = event.target.parentElement;
+                let parents1 = parents.parentElement;
+                let parents2 = parents1.parentElement;
+                let secondNode = parents2.children[1];
+
+
+                event1.style.background = '#d7d7d7'
+                parents2.style.color = '#d7d7d7'
+                secondNode.style.color = '#d7d7d7'
+
+
 
             } else {
                 alert('fail')
