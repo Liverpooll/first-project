@@ -2,8 +2,6 @@ html, body {
   margin: 0;
   width:100%;
   height:100%;
-  background: #d9d9d9;
-  font-weight: bold;
 }
   
 div {
@@ -23,10 +21,17 @@ hr {
 }
 
 .todo-box {
+
   width:35%;
   height:100%;
   background-color: white;
   margin:auto;
+  width:350px;
+  height:600px;
+  background-color: white;
+  margin:auto;
+  margin-top:20px;
+
 }
 
 .header {
@@ -41,6 +46,7 @@ hr {
   vertical-align: middle;
   margin-left:20px;
 }
+
 
 .header-2 {
   width:100%;
@@ -181,7 +187,124 @@ hr {
   padding-left: 13px;
 }
 
+.header-2 {
+  width:100%;
+  height:60px;
+  background-color: rgb(255, 255, 255);
+}
 
+.header-2 p {
+  font-size:15px;
+  padding:17px 0px 0px 20px;
+}
+
+.header-2 hr {
+  margin-top:-5px;
+  border:solid 1px black;
+}
+
+.input-header {
+  width:100%;
+  height:80px;
+  background-color: rgba(225, 224, 224, 0.934);
+}
+
+.todoValue {
+  width:80%;
+  height:35px;
+  margin:auto;
+  margin-top:10px;
+  /* border: none; */
+  border:solid 3px #C62828;
+  border-top:5px;
+  border-left:5px;
+  border-right:5px;
+  padding-left:10px;
+  font-weight: 600;
+  font-size:13px;
+}
+
+.todoValue:hover {
+  box-shadow: 1px 1px 1px 0px grey;
+}
+
+.todoValue:focus {
+  outline: none;
+}
+
+.todoValue::placeholder {
+  font-weight:600;
+  font-size:13px;
+}
+
+.input-header hr{
+  margin-top: 5px;
+  border:solid 1px black;
+}
+
+.input-header p {
+  cursor:pointer;
+  font-weight: 600;
+  font-size: 13px;
+  float:right;
+  margin-top:-17px;
+  clear:both;
+}
+
+
+
+
+
+
+
+
+
+
+
+.Up-box {
+  background-color:  #ffffff;
+  width: 100%;
+  height: 100%;
+  border: 2px solid rgb(255, 255, 255);
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  border-radius: 20px;
+}
+.form-box {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+
+
+
+
+.Down-box {
+  width:100%;
+  height:410px;
+  flex-direction: column;
+  background-color: rgb(255, 255, 255);
+}
+
+.Down-box1 {
+  width:100%;
+  margin-right:10px;
+}
+
+.Down-box  hr {
+  background-color: rgb(0, 0, 0);
+  width:90%;
+  border: 1px solid rgb(226, 226, 226);
+  margin-top:40px;
+  position: absolute;
+  margin-left:18px;
+}
+
+.todo_list_li {
+  margin-left:-15px;
+}
 
 
 .Down-box1  button {
@@ -191,9 +314,12 @@ hr {
 
 
 
+
 /* .todo_list_li form {
   display: inline-block;
 } */
+
+
 
 
 

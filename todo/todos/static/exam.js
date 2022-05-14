@@ -4,6 +4,7 @@ const form_box = document.querySelector('.form-box');
 const todo_input = document.querySelector('.todoValue');
 const submit_btn = document.querySelector('.btn-outline-dark');
 const inner_box = document.querySelector('.Down-box1');
+const nbsp = '&nbsp'
 
 
 
@@ -56,13 +57,16 @@ function create_todo(id) {
                     radio.style.marginLeft = '17px'
                     radio.setAttribute('onclick', `done_onclick(${id},event)`);
                     radio.classList.add('btn_done');
+                    radio.style.marginTop = "17px"
 
 
                     span.innerText = todo_input.value;
                     span.style.cursor = "pointer"
+
                     span.style.marginLeft = '10px'
 
                     span.setAttribute("onclick", `change_input_onclick(${id}, event)`);
+                    span.style.fontSize = "13px"
                     li.classList.add('todo_list_li');
 
 
