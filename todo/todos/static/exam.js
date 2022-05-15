@@ -4,7 +4,6 @@ const form_box = document.querySelector('.form-box');
 const todo_input = document.querySelector('.todoValue');
 const submit_btn = document.querySelector('.btn-outline-dark');
 const inner_box = document.querySelector('.Down-box1');
-const nbsp = '&nbsp'
 
 
 
@@ -51,22 +50,20 @@ function create_todo(id) {
                     let X_button = document.createElement('input');
                     let radio = document.createElement('input');
                     let hr = document.createElement('hr');
+                    let div = document.createElement('div');
+                    let div1 = document.createElement('div');
 
 
+                    div.classList.add('check_span');
                     radio.type = 'checkbox';
-                    radio.style.marginLeft = '17px'
                     radio.setAttribute('onclick', `done_onclick(${id},event)`);
                     radio.classList.add('btn_done');
-                    radio.style.marginTop = "17px"
-
 
                     span.innerText = todo_input.value;
                     span.style.cursor = "pointer"
-
-                    span.style.marginLeft = '10px'
-
                     span.setAttribute("onclick", `change_input_onclick(${id}, event)`);
-                    span.style.fontSize = "13px"
+                    span.style.fontSize = "16px";
+
                     li.classList.add('todo_list_li');
 
 
@@ -75,11 +72,13 @@ function create_todo(id) {
                     X_button.value = 'X';
                     X_button.setAttribute("onclick", `delete_onclick(${id}, event)`);
                     X_button.classList.add('btn_delete');
-                    X_button.style.marginTop = '7px';
+
 
                     
-                    li.appendChild(radio);
-                    li.appendChild(span);
+                    div.appendChild(radio);
+                    div.appendChild(div1);
+                    div.appendChild(span);
+                    li.appendChild(div);
                     li.appendChild(X_button);
                     li.appendChild(hr);
 
@@ -100,23 +99,16 @@ function create_todo(id) {
 
 
 
+
 // 체인지 인풋 온클릭 함수에서 누는 수정완료 버튼이 클릭 됐을 때 연결되는 함수
 function edit_success_onclick(id, event) {
 
 
+    let event_target = event.target;
     let new_input = document.querySelector('.new_input');
     let event_parent = event.target.parentElement;
-    let secondNode = event_parent.children[1];
     let thirdNode = event_parent.children[2];
-
     let span = document.createElement('span');
-    let radio = document.createElement('input');
-
-
-
-    radio.type = 'checkbox';
-    radio.setAttribute('onclick', `done_onclick(${id},event)`);
-    radio.classList.add('btn_done');
 
     span.innerText = new_input.value;
     span.style.cursor = "pointer"
@@ -142,14 +134,19 @@ function edit_success_onclick(id, event) {
         .then(function(response) {
             let result = response.data['is_success']
             if (result === true) {
-                if (new_input.value === '') {
-                    alert('수정해주세요');
+                if (new_input.value !== '') {
+                    event_parent.removeChild(thirdNode);
+                    event_parent.removeChild(event_target);
+                    event_parent.appendChild(span);
+
                 } else {
-                event_parent.replaceChild(span, secondNode);
-                event_parent.removeChild(thirdNode);
+                    alert('수정해주세요');
+
+
                 }
             } else {
                 alert('fail');
+                console.log('d')
             }
         })
         .catch((error) => {
@@ -157,6 +154,8 @@ function edit_success_onclick(id, event) {
         })
 
 }
+
+
 
 
 function change_input_onclick(id, event) {
@@ -168,30 +167,27 @@ function change_input_onclick(id, event) {
     let new_input = document.createElement('input');
     let current_input = document.querySelector('.new_input');
     let event_parent = event.target.parentElement;
-    let secondNode = event_parent.children[1];
     let thirdNode = event_parent.children[2];
+    let current_value = event.target.innerHTML;
 
 
-    Edit_button.innerText = '수정!'
+    Edit_button.innerText = '수정!';
+    Edit_button.classList.add('btn_modify');
     Edit_button.setAttribute("onclick", `edit_success_onclick(${id}, event)`);
 
     new_input.classList.add('new_input');
     new_input.classList.add('todo_list_li');
+    new_input.placeholder=`${current_value}`;
 
     if (current_input) {
         alert('한번에 하나만 수정해주세욥');
     } else{
-    event_parent.replaceChild(new_input, secondNode);
-    event_parent.replaceChild(Edit_button, thirdNode);
-    event_parent.appendChild(thirdNode);
+        event_parent.removeChild(thirdNode);
+        event_parent.appendChild(new_input);
+        event_parent.appendChild(Edit_button);
     }
-    $('.new_input').keydown((key) => {
-        if (key.keyCode === 13) {
-            edit_success_onclick(id, event);
-        }
-    });
-
 }
+
 
 
 
@@ -228,9 +224,7 @@ function delete_onclick(id, event) {
 }
 
 
-let event1 = '';
 function done_onclick(id, event) {
-
     axios({
             url: `/todos/done/`,
             method: 'post',
@@ -245,20 +239,26 @@ function done_onclick(id, event) {
         .then(function(response) {
             let result = response.data['is_success']
             if (result === true) {
-                let event1 = event.target;
-                let parents = event.target.parentElement;
-                let parents1 = parents.parentElement;
-                let parents2 = parents1.parentElement;
-                let secondNode = parents2.children[1];
+                let checking = event.target;
+                let parent = event.target.parentElement;
+                let parent1 = parent.parentElement;
+                let firstNode = parent.children[0];
+                let secondNode = parent.children[2];
 
-
-                event1.style.background = '#d7d7d7'
-                parents2.style.color = '#d7d7d7'
-                secondNode.style.color = '#d7d7d7'
-
-
-
-            } else {
+                if (checking.checked == true) {
+                firstNode.style.background = '#bdb3b3';
+                secondNode.style.color = '#bdb3b3';
+                secondNode.classList.add('disabled');
+                parent1.children[1].style.color = '#bdb3b3';
+                } else {
+                firstNode.style.background = 'white';
+                secondNode.style.color = 'black';
+                secondNode.classList.remove('disabled');
+                secondNode.setAttribute('onclick', `change_input_onclick(${id}, event)`);
+                parent1.children[1].style.color = '#C62828';
+                }
+                
+            }else {
                 alert('fail')
             }
         })

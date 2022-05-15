@@ -104,7 +104,10 @@ class TodoDone(View):
         data = json.loads(request.body.decode('utf-8'))
         try:
             todo= Todo.objects.get(id = data['id'])
-            todo.is_completed = True
+            if todo.is_completed == True:
+                todo.is_completed = False
+            else:
+                todo.is_completed = True
             todo.save()
             result = True
             id = todo.id

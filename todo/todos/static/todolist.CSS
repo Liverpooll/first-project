@@ -3,6 +3,7 @@ html, body {
   width:100%;
   height:100%;
   background-color: grey;
+  overflow: hidden;
 }
   
 div {
@@ -27,10 +28,6 @@ hr {
   height:100%;
   background-color: white;
   margin:auto;
-  height:200px;
-  background-color: white;
-  margin:auto;
-  margin-top:20px;
 
 }
 
@@ -122,28 +119,10 @@ hr {
   float:right;
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
 .form-box {
   display: flex;
   justify-content: space-between;
 }
-
-
-
-
-
-
 .Down-box {
   width:100%;
   height:571px;
@@ -169,7 +148,7 @@ hr {
   height:1px;
   border-width:1px 0px 0px 0px;
   background-color: rgb(182, 181, 181);;
-  width:90%;
+  width:100%;
 
 }
 
@@ -178,7 +157,7 @@ hr {
   padding:8px;
   justify-content: space-between;
   width:95%;
-  margin-left:-15px;
+  margin-left:0px;
 }
 
 .check_span span {
@@ -231,4 +210,26 @@ input[type="checkbox"]:checked {
   .todo-box {
     width: 100%;
   }
+}
+
+.btn_modify {
+  background-color: #C62828;
+  color: white;
+  border:none;
+  margin-left:10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.new_input {
+  height:8px;
+  width:150px;
+  border-top:1px;
+  border-left:1px;
+  border-right:1px;
+  
+}
+
+.disabled { 
+  pointer-events: none; 
 }
