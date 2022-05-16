@@ -270,4 +270,5 @@ pyvenv.cfg
 pip-selfcheck.json
 
 # End of https://www.toptal.com/developers/gitignore/api/django,python,elasticbeanstalk,virtualenv
-todo/config/settings.py
+settings.py
+.ebextensions/
