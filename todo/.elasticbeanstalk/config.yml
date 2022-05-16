@@ -1,0 +1,22 @@
+branch-defaults:
+  default:
+    environment: todo-env
+    group_suffix: null
+environment-defaults:
+  todo-env:
+    branch: null
+    repository: null
+global:
+  application_name: todo
+  branch: null
+  default_ec2_keyname: todo
+  default_platform: Python 3.8
+  default_region: ap-northeast-2
+  include_git_submodules: true
+  instance_profile: null
+  platform_name: null
+  platform_version: null
+  profile: null
+  repository: null
+  sc: null
+  workspace_type: Application
