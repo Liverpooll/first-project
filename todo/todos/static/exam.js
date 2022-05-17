@@ -211,8 +211,8 @@ function delete_onclick(id, event) {
         .then(function(response) {
             let result = response.data['is_success']
             if (result === true) {
-                let dd = event.target.parentElement;
-                dd.remove();
+                let event_target_parent = event.target.parentElement;
+                event_target_parent.remove();
 
             } else {
                 alert('fail')

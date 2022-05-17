@@ -7,9 +7,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;1,300;1,400&family=Montserrat:ital,wght@1,600&family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'todolist.css'%}">
     <title>ToDoList</title>
 </head>
@@ -31,7 +28,7 @@
                     <input type="text" style="display:none;">
                 </form>
                 <hr>
-                <p onclick="create_todo()" class="btn" style="margin-top:0px; margin-bottom:0px;">Add</p>
+                <p onclick="create_todo()" class="btn">Add</p>
             </div>
 
             <div class="Down-box">
@@ -61,47 +58,6 @@
             </div>
         </div>
     </div>
-
-
-
-
-    {% comment %} <div class="wrapper">
-        <div <div class="Up-box">
-            <form class="form-box" action="#" method="POST">
-                {% csrf_token %}
-                <div>
-                    <span>닉네임</span>
-                    <div class="input-group input-group-sm mb-3">
-                        <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" disabled>
-                    </div>
-                </div>
-                <div>
-                    <div class="input-2">
-                        <span>마감기한</span>
-                        <input type="date">
-                    </div>
-                </div>
-                <div>
-                    <div class="input-3">
-                        <span>To do!</span>
-                        <input type="text" name="username" class="todoValue" autofocus>
-                    </div>
-                </div>
-                <div>
-                    <div class="input-4">
-                        <input onclick="create_todo()" class="btn btn-outline-dark" type="button" value="Click!">
-                    </div>
-                </div>
-            </form>
-            {% comment %}
-        </div> {% endcomment %}
-
-        {% comment %}
-    </div> {% endcomment %}
-    {% comment %} {% for i in completed_list %}
-    {i.todo}
-    {i.is_completed%}
-    {% endfor %} {% endcomment %}
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

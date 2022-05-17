@@ -117,7 +117,8 @@ hr {
   font-size: 13px;
   margin-right:10px;
   float:right;
-
+  margin-top:0px;
+  margin-bottom:0px;
 }
 .form-box {
   display: flex;
