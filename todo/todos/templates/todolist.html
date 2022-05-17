@@ -55,13 +55,6 @@
                 <input type="button" onclick="delete_onclick({{i.id}}, event)" class="btn_delete" value="X">
                 <hr>    
                         {% endif %}
-                        {% comment %} <div class="check_span">
-                            <input type="checkbox" onclick="done_onclick({{i.id}}, event)" id="btn_done">
-                            <label for="btn_done"></label>
-                            <span id="{{forloop.counter0}}" onclick="change_input_onclick({{i.id}}, event)">{{i.todo}}</span>
-                        </div>
-                        <input type="button" onclick="delete_onclick({{i.id}}, event)" class="btn_delete" value="X">
-                    <hr> {% endcomment %}
                     </li>
                     {% endfor %}
                 </ol>
