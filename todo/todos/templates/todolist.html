@@ -33,6 +33,13 @@
 
             <div class="Down-box">
             <ol class="Down-box1" style="list-style:none;">
+
+
+            {% if request.user.is_authenticated %}
+                <li><a href="/logout">Log Out</a></li>
+                {% else %}
+                <li><button class="non-login" onclick="get_Cookie({{i.id}})">ADD</button></li>
+                {% endif %}
                     {% for i in todolist %}
                     <li class="todo_list_li">
                        {% if i.is_completed == True %}

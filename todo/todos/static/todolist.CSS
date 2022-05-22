@@ -178,6 +178,8 @@ hr {
   font-weight: bolder;
 }
 
+
+
 input[type="checkbox"] {
   width: 0.8rem;
   height: 0.8rem;
@@ -234,3 +236,4 @@ input[type="checkbox"]:checked {
 .disabled { 
   pointer-events: none; 
 }
+
